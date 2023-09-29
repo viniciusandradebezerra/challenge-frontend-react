@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 let db: any = null;
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     if (!db) {
       db = await open({
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   try {
     if (!db) {
       db = await open({
@@ -131,7 +131,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
   try {
     if (!db) {
       db = await open({
@@ -140,7 +140,7 @@ export async function DELETE(req: Request) {
       });
     }
 
-    const { id } = await req.json();
+    const id = req.nextUrl.searchParams.get("id");
 
     if (!id) {
       return new NextResponse(

@@ -1,4 +1,4 @@
-import { TProductDto } from "@/app/types/product-dto/product.dto";
+import { TProductDto } from "@types";
 
 export type TCart = {
   quantity: number;
