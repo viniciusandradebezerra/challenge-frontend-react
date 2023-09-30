@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   try {
     const session = await stripe.checkout.sessions.create({
       customer: body.customerId,
-      mode: "payment", // Change to "payment" for one-time payment or "subscription" for subscription
+      mode: "payment",
       line_items: [
         {
           price_data: {

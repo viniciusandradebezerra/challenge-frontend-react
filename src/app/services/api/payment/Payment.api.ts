@@ -2,12 +2,15 @@ import { ICheckoutBody } from "@types";
 import { loadStripe } from "@stripe/stripe-js";
 import Stripe from "stripe";
 
+const apiUrl = 'http://localhost:3000/api/payment';
+
+
 const checkout = async (body: ICheckoutBody) => {
     const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
     const stripe = await loadStripe(STRIPE_PK);
 
     try {
-        const response = await fetch("http://localhost:3000/api/payment", {
+        const response = await fetch(`${apiUrl}`, {
             method: "post",
             body: JSON.stringify(body, null),
             headers: {

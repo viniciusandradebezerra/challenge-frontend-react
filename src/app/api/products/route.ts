@@ -116,7 +116,6 @@ export async function GET(req: NextRequest) {
         );
       }
     } else {
-      // Buscar todos os produtos
       const products = await db.all("SELECT * FROM products");
       return new NextResponse(JSON.stringify({ products }), {
         status: 200,

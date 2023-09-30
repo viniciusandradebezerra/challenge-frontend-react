@@ -34,7 +34,7 @@ export const ProductTable = ({ products }: { products: TProductDto[] | undefined
             setMessage({ title: 'Produto deletado com sucesso!', type: 'success' })
         } catch (error) {
             setMessage({ title: 'Algo aconteceu, tente novamente!', type: 'error' })
-            console.log('Error: ', error)
+            console.error('Error: ', error)
         }
     }
 
