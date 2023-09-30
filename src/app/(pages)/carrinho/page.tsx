@@ -1,14 +1,12 @@
+import { Cart } from "@components";
 
-import { ProductForm } from "@components";
-
-
-const Adicionar = () => {
+const CartHome = () => {
 
   return (
     <>
-        <ProductForm statusFormState={'add'} />
+        <Cart />
     </>
   );
 }
 
-export default Adicionar
+export default CartHome

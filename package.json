@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.14.11",
+    "@stripe/stripe-js": "^2.1.6",
     "@tanstack/react-query": "^4.35.3",
     "@tanstack/react-query-devtools": "^4.35.3",
     "axios": "^1.5.1",
@@ -23,6 +24,7 @@
     "react-hook-form": "^7.46.2",
     "sqlite": "^5.0.1",
     "sqlite3": "^5.1.6",
+    "stripe": "^13.8.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {

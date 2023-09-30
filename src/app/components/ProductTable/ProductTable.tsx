@@ -45,6 +45,7 @@ export const ProductTable = ({ products }: { products: TProductDto[] | undefined
             const updatedCart = [{ ...product, quantity: 1 }];
             setItem('cart', JSON.stringify(updatedCart), 'local');
             setCart(updatedCart);
+            setMessage({title: "Produto adicionado ao carrinho", type: "success"});
         } else {
             const listProductsTreated = JSON.parse(listProducts);
             const existingProduct = listProductsTreated.find((item: TProductDto) => item.id === product.id);
@@ -55,6 +56,7 @@ export const ProductTable = ({ products }: { products: TProductDto[] | undefined
             }
             setItem('cart', JSON.stringify(listProductsTreated), 'local');
             setCart(listProductsTreated);
+            setMessage({title: "Produto adicionado ao carrinho", type: "success"});
         }
     };
 
