@@ -1,5 +1,5 @@
 export type TProductDto = {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   price: string;

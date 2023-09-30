@@ -1,59 +1,84 @@
-import { TCreateProductDto, TEditProductDto } from '@/app/types'
-import { api } from '@services'
+import { TCreateProductDto, TEditProductDto, TProductDto } from '@/app/types';
 
-const getProductById = async ({ id }: {id: string}) => {
-  try {
-    const { data } = await api.get<any>(`/products?id=${id}`)
-    return data
-  } catch (error: any) {
-    throw new Error(error)
+const apiUrl = 'http://localhost:3000/api/products';
+
+const handleResponse = async (response: Response) => {
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Erro na solicitação');
   }
-}
+  return response.json();
+};
+
+const getProductById = async (id: string) => {
+  try {
+    const response = await fetch(`${apiUrl}?id=${id}`);
+    const data = await handleResponse(response);
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao buscar o produto por ID');
+  }
+};
 
 const getAllProducts = async () => {
   try {
-    const { data } = await api.get<any>(`/products`)
-    return data
-  } catch (error: any) {
-    throw new Error(error)
+    const response = await fetch(apiUrl);
+    const data = await handleResponse(response);
+    const { products } = data;
+    return products as TProductDto[];
+  } catch (error) {
+    throw new Error('Erro ao buscar todos os produtos');
   }
-}
+};
 
 const editProduct = async (product: TEditProductDto) => {
   try {
-    const { data } = await api.put<any>(`/products`, {
-      product
-    })
-    return data
-  } catch (error: any) {
-    throw new Error(error)
+    const response = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    });
+    const data = await handleResponse(response);
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao editar o produto');
   }
-}
+};
 
 const addProduct = async (product: TCreateProductDto) => {
   try {
-    const { data } = await api.put<any>(`/products`, {
-      product
-    })
-    return data
-  } catch (error: any) {
-    throw new Error(error)
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    });
+    const data = await handleResponse(response);
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao adicionar o produto');
   }
-}
+};
 
-const deleteProduct = async ({ id }: {id: string}) => {
+const deleteProduct = async ({ id }: { id: string }) => {
   try {
-    const { data } = await api.delete<any>(`/products?id=${id}`)
-    return data
-  } catch (error: any) {
-    throw new Error(error)
+    const response = await fetch(`${apiUrl}?id=${id}`, {
+      method: 'DELETE',
+    });
+    const data = await handleResponse(response);
+    return data;
+  } catch (error) {
+    throw new Error('Erro ao excluir o produto');
   }
-}
+};
 
-export const CmsApi = {
+export const ProductsApi = {
   getProductById,
   getAllProducts,
   editProduct,
   deleteProduct,
-  addProduct
-}
+  addProduct,
+};

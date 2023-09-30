@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 let db: any = null;
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
     if (!db) {
       db = await open({

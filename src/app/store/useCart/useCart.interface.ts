@@ -5,9 +5,9 @@ export type TCart = {
 } & TProductDto;
 
 export type TState = {
-  cart: [TCart] | undefined;
+  cart: TCart[] | undefined;
 };
 
 export type TActions = {
-  setCart: (cart: [TCart]) => void;
+  setCart: (cart: TCart[]) => void;
 };

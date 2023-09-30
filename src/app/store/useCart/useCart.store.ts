@@ -5,7 +5,7 @@ const initialState: TState = {
   cart: undefined,
 };
 
-export const useProductStore = create<TState & TActions>()((set) => ({
+export const useCartStore = create<TState & TActions>()((set) => ({
   ...initialState,
-  setCart: (cart: [TCart]) => set({ cart: cart }),
+  setCart: (cart: TCart[]) => set({ cart: cart }),
 }));

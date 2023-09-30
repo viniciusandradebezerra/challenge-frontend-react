@@ -1,6 +1,27 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+
+'use client'
+import { useQuery } from "@tanstack/react-query";
+import { TProductDto } from "@types";
+import { ProductsApi } from "@services";
+import { Typography } from "@mui/material";
+import { ProductTable } from "@components";
+
 
 export default function Home() {
-  return <></>;
+
+  const { data, isLoading, isError } = useQuery<TProductDto[]>({
+    queryKey: ["products"],
+    queryFn: () => ProductsApi.getAllProducts(),
+    staleTime: 5 * 1000,
+  });
+
+  if(isLoading) return <Typography>Loading...</Typography>
+
+  if(isError) return <Typography>Client or Sever Error...</Typography>
+
+  return (
+    <>
+        <ProductTable products={data} />
+    </>
+  );
 }

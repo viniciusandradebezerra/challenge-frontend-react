@@ -36,9 +36,9 @@ db.serialize(() => {
       console.log("Created products table");
 
       // Sample values for insertion
-      const product1 = ["Product 1", 19.99, "Description for Product 1"];
-      const product2 = ["Product 2", 29.99, "Description for Product 2"];
-      const product3 = ["Product 3", 39.99, "Description for Product 3"];
+      const product1 = ["Product 1", 19, "Description for Product 1"];
+      const product2 = ["Product 2", 29, "Description for Product 2"];
+      const product3 = ["Product 3", 39, "Description for Product 3"];
 
       // SQL command for insertion
       const insertSql = `INSERT INTO products (name, price, description) VALUES (?, ?, ?)`;
