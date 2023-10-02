@@ -16,6 +16,10 @@ Para instalar o challenge-frontend-react, siga estas etapas:
 Linux, macOS e Windows:
 
 ```
+npm config set legacy-peer-deps true
+```
+
+```
 npm i
 ```
 
