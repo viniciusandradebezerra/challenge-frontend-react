@@ -2,14 +2,17 @@
 import { useForm, Controller } from "react-hook-form";
 import { TextField, Button, Container, Typography } from "@mui/material";
 import { TProductDto } from "@types";
-import { FormData, ProductFormProps } from "./ProductForm.interface";
+import { TFormData, IProductFormProps } from "./ProductForm.interface";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ProductsApi } from "@services";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useToastMessage } from "@store";
 
-export const ProductForm = ({ statusFormState, product }: ProductFormProps) => {
+export const ProductForm = ({
+  statusFormState,
+  product,
+}: IProductFormProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const addProductMutation = useMutation(ProductsApi.addProduct);
@@ -21,7 +24,7 @@ export const ProductForm = ({ statusFormState, product }: ProductFormProps) => {
     control,
     reset,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<TFormData>();
 
   const defaultValues: TProductDto = {
     name: product?.name!,

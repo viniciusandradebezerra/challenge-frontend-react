@@ -1,12 +1,12 @@
 import { TProductDto } from "@/app/types";
 
-export type FormData = {
+export type TFormData = {
     name: string;
     price: string;
     description: string;
 };
 
-export interface ProductFormProps {
+export interface IProductFormProps {
     product?: TProductDto
     statusFormState: 'edit' | 'add'
 }
