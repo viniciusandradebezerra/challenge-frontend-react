@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         },
       ],
       success_url: success_url,
-      cancel_url: `${origin}/cancel?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/carrinho`,
     });
     return NextResponse.json(session);
   } catch (error) {
