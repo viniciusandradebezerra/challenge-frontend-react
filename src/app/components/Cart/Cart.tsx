@@ -138,7 +138,7 @@ export const Cart = () => {
                     -
                   </IconButton>
                   {product.quantity}
-                  <IconButton onClick={() => handleAddItemCart(product, true)}>
+                  <IconButton data-testid={`add-button-${product.id}`} onClick={() => handleAddItemCart(product, true)}>
                     +
                   </IconButton>
                 </TableCell>

@@ -56,7 +56,27 @@ export const ProductTable = ({
   };
 
   const handleAddItemCart = (product: TProductDto) => {
-    // ... (Your existing code for adding items to the cart)
+    const listProducts = getItem("cart", "local");
+
+    if (!listProducts) {
+      const updatedCart = [{ ...product, quantity: 1 }];
+      setItem("cart", JSON.stringify(updatedCart), "local");
+      setCart(updatedCart);
+      setMessage({ title: "Produto adicionado ao carrinho", type: "success" });
+    } else {
+      const listProductsTreated = JSON.parse(listProducts);
+      const existingProduct = listProductsTreated.find(
+        (item: TProductDto) => item.id === product.id
+      );
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        listProductsTreated.push({ ...product, quantity: 1 });
+      }
+      setItem("cart", JSON.stringify(listProductsTreated), "local");
+      setCart(listProductsTreated);
+      setMessage({ title: "Produto adicionado ao carrinho", type: "success" });
+    }
   };
 
   useEffect(() => {
@@ -87,18 +107,21 @@ export const ProductTable = ({
                 <TableCell>{formatCurrency(product.price)}</TableCell>
                 <TableCell>
                   <IconButton
+                    data-testid={`delete-product-${product.id}`}
                     onClick={() => handleDelete(product.id!)}
                     aria-label="Deletar"
                   >
                     <DeleteIcon />
                   </IconButton>
                   <IconButton
+                    data-testid={`edit-product-${product.id}`}
                     onClick={() => router.push(`/editar/${product.id!}`)}
                     aria-label="Editar"
                   >
                     <EditIcon />
                   </IconButton>
                   <IconButton
+                    data-testid={`add-to-cart-product-${product.id}`}
                     onClick={() => handleAddItemCart(product)}
                     aria-label="Visualizar"
                   >
@@ -110,7 +133,7 @@ export const ProductTable = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <Box justifyContent={"center"} mt={4}>
+      <Box justifyContent={"center"} mt={4} display={"flex"}>
         <Pagination
           count={Math.ceil((products?.length || 0) / itemsPerPage)}
           page={currentPage}

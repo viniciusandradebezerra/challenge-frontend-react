@@ -12,8 +12,6 @@ export default function Home() {
     staleTime: 5 * 1000,
   });
 
-  console.log(data);
-
   if (isLoading) return <Typography>Loading...</Typography>;
 
   if (isError) return <Typography>Client or Sever Error...</Typography>;
